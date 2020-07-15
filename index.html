@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Three.js test</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"></script>
+        <script src="main.js"></script>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            .container_of_mashes {
+                position: fixed;
+                min-height: 300px;
+                width: 500px;
+                border: 1px solid black;
+                background-color: #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="panel">
+            <div>
+                <label for="geometry">Geometry</label>
+                <select id="geometry" name="geometry">
+                    <option>cube</option>
+                    <option>sphere</option>
+                    <option>cylinder</option>
+                </select>
+            </div>
+            <h3>Scale</h3>
+            <div>
+                <label for="scale_x">X</label>
+                <input type="range" name="scale_x" id="scale_x" min="0" max="10">
+            </div><div>
+                <label for="scale_y">Y</label>
+                <input type="range" name="scale_y" id="scale_y" min="0" max="10">
+            </div><div>
+                <label for="scale_z">Z</label>
+                <input type="range" name="scale_z" id="scale_z" min="0" max="10">
+            </div>
+            <input type="submit" value="Create">
+        </form>
+        <canvas id="canvas"></canvas>
+        <div class="container_of_mashes">
+            <h3>Existed Meshes</h3>
+            <ul id="list_of_meshes"></ul>
+        </div>
+    </body>
+</html>
