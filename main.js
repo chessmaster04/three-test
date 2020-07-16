@@ -82,7 +82,7 @@ function createCubeGeometry(scale_x, scale_y, scale_z) {
     var cube = new THREE.Mesh( geometry, material );
     cube.position.y = getRandomInt(HEIGHT);
     cube.position.x = getRandomInt(WIDTH);
-    cube.position.z = Math.floor(Math.random()*100);
+    cube.position.z = getRandomInt(1000);
     cube.receiveShadow = true;
     cube.castShadow = true;
     return cube
@@ -95,7 +95,7 @@ function createSphereGeometry(scale_x, scale_y, scale_z) {
     var sphere = new THREE.Mesh( geometry, material );
     sphere.position.y = getRandomInt(HEIGHT);
     sphere.position.x = getRandomInt(WIDTH);
-    sphere.position.z = Math.floor(Math.random()*100);
+    sphere.position.z = getRandomInt(1000);
     sphere.receiveShadow = true;
     sphere.castShadow = true;
     return sphere
@@ -108,7 +108,7 @@ function createCylinderGeometry(scale_x, scale_y, scale_z) {
     var cylinder = new THREE.Mesh( geometry, material );
     cylinder.position.y = getRandomInt(HEIGHT);
     cylinder.position.x = getRandomInt(WIDTH);
-    cylinder.position.z = Math.floor(Math.random()*100);
+    cylinder.position.z = getRandomInt(1000);
     cylinder.receiveShadow = true;
     cylinder.castShadow = true;
     return cylinder
