@@ -1,1 +1,1 @@
-done 1st and 2nd parts
+three.js test task
