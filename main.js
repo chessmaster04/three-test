@@ -10,6 +10,7 @@ const HEIGHT = 600;
 
 var rerender = null;
 var scene = null;
+var controls = null;
 const meshes = {};
 
 function init_canvas() {
@@ -28,11 +29,17 @@ function init_canvas() {
 
     camera.position.set(100,100,500);
 
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+
     var light = new THREE.SpotLight(0xffffff );
-	light.position.x = 0;
-	light.position.y = 100;
-	light.position.z = 600;
-	light.castShadow = true;
+	light.position.set( 200, 1000, 200 );
+    light.castShadow = true;
+    light.shadow.mapSize.width = WIDTH;
+    light.shadow.mapSize.height = HEIGHT;
+
+    light.shadow.camera.near = 500;
+    light.shadow.camera.far = 4000;
+    light.shadow.camera.fov = 30;
     scene.add(light);
 
     var line_y_geometry = new THREE.Geometry(); 
@@ -55,6 +62,12 @@ function init_canvas() {
 	scene.add(line_z);
     
     rerender = (scene) => renderer.render(scene, camera);
+    
+}
+
+function animate() {
+    controls.update();
+    requestAnimationFrame ( animate );  
     rerender(scene);
 }
 
@@ -65,33 +78,39 @@ function getRandomInt(max) {
 function createCubeGeometry(scale_x, scale_y, scale_z) {
     var geometry = new THREE.BoxGeometry( 20, 20, 20 );
     geometry.scale(scale_x, scale_y, scale_z);
-    var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    var material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
     var cube = new THREE.Mesh( geometry, material );
     cube.position.y = getRandomInt(HEIGHT);
     cube.position.x = getRandomInt(WIDTH);
     cube.position.z = Math.floor(Math.random()*100);
+    cube.receiveShadow = true;
+    cube.castShadow = true;
     return cube
 }
 
 function createSphereGeometry(scale_x, scale_y, scale_z) {
     var geometry = new THREE.SphereGeometry(20, 20, 20);
     geometry.scale(scale_x, scale_y, scale_z);
-    var material = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+    var material = new THREE.MeshLambertMaterial( {color: 0xff0000} );
     var sphere = new THREE.Mesh( geometry, material );
     sphere.position.y = getRandomInt(HEIGHT);
     sphere.position.x = getRandomInt(WIDTH);
     sphere.position.z = Math.floor(Math.random()*100);
+    sphere.receiveShadow = true;
+    sphere.castShadow = true;
     return sphere
 }
 
 function createCylinderGeometry(scale_x, scale_y, scale_z) {
     var geometry = new THREE.CylinderGeometry( 20, 20, 20, 32 );
     geometry.scale(scale_x, scale_y, scale_z);
-    var material = new THREE.MeshBasicMaterial( {color: 0x0000ff} );
+    var material = new THREE.MeshLambertMaterial( {color: 0x0000ff} );
     var cylinder = new THREE.Mesh( geometry, material );
     cylinder.position.y = getRandomInt(HEIGHT);
     cylinder.position.x = getRandomInt(WIDTH);
     cylinder.position.z = Math.floor(Math.random()*100);
+    cylinder.receiveShadow = true;
+    cylinder.castShadow = true;
     return cylinder
 }
 
@@ -142,4 +161,5 @@ function onSubmit(e) {
 window.onload = function () {
     document.querySelector("#panel").addEventListener('submit', onSubmit);
     init_canvas();
+    animate();
 }
